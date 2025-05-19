@@ -85,8 +85,12 @@ capInsDat[, table(coca_nombre, grupo_capacidad )]
 # identificar valores de otra columna (Naturaleza) para graficos desagregados
 capInsDat[, table(naju_nombre)]
 
-ggDeptoSerEl(df = capInsDat, coca_nam = "Pediátrica" , grupo_cap = "CAMAS")
-ggDeptoSerEl(df = capInsDat, coca_nam = "Consulta Externa" , grupo_cap = "CONSULTORIOS")
+pp = ggDeptoSerEl(df = capInsDat, coca_nam = "Pediátrica" , grupo_cap = "CAMAS")
+ggsave( file.path(outPath, "mapaCalorPedriaticaCamas.png") , plot = pp, width = 6, height = 4, dpi = 300)
+
+pp = ggDeptoSerEl(df = capInsDat, coca_nam = "Consulta Externa" , grupo_cap = "CONSULTORIOS")
+ggsave( file.path(outPath, "mapaCalorConsulta_ExternaCONSULTORIOS.png"), plot = pp, width = 6, height = 4, dpi = 300)
+
 
 # realizar el grafico con los 3 tipos de naturaleza 
 gg1 = ggDeptoSerEl(df = capInsDat[naju_nombre == "Pública"], 
@@ -103,6 +107,10 @@ gg3 = ggDeptoSerEl(df = capInsDat[naju_nombre == "Mixta"],
 
 grid.arrange(gg1, gg2, gg3, ncol = 1)
 
+g <- arrangeGrob(gg1, gg2, gg3, ncol = 1)
+
+# Guardar el objeto combinado
+ggsave(file.path(outPath,"ConsultaExternaNaturaleza.png"), g, width = 6, height = 12, dpi = 300)
 ################################################
 
 # Estadisticas descriptivas -----------------------------------
