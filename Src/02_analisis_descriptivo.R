@@ -72,12 +72,15 @@ colombia <- ne_states(country = "Colombia", returnclass = "sf") %>%
 
 # Sedes 
 # Mapa de calor para Sedes por departamento
-ggDeptoAgr(sedDat)
+pp = ggDeptoAgr(sedDat)
+ggsave( file.path(outPath, "mapaCalorSedes.png") , plot = pp, width = 6, height = 4, dpi = 300)
 # Mapa de calor para Sedes por departamento, para comparar
 # municipios PDET con NO PDET
-ggDeptoAgr(sedDat, aux = "municipio_pdet")
+pp =ggDeptoAgr(sedDat, aux = "municipio_pdet")
+ggsave( file.path(outPath, "mapaCalorSedesPDET.png") , plot = pp, width = 6, height = 4, dpi = 300)
 #mapa de calor solo SI PDET
-ggDeptoAgr(sedDat[ municipio_pdet == "SI"])
+pp =ggDeptoAgr(sedDat[ municipio_pdet == "SI"])
+ggsave( file.path(outPath, "mapaCalorSedesPDET_SI.png") , plot = pp, width = 6, height = 4, dpi = 300)
 
 # CapacidadInstalada
 # identificar posibles combinaciones para dibujar mapa de calor 
